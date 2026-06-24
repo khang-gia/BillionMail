@@ -13,7 +13,7 @@
 		<!-- 应用标志和名称 -->
 		<div class="app-logo" :class="{ collapse: isCollapse }">
 			<a href="/">
-				<img class="icon" src="@/assets/images/mailix-logo.png"></img>
+				<img class="icon" src="@/assets/images/mailix-logo.png" />
 				<!-- <span v-show="!isCollapse" class="app-name">BillionMail</span> -->
 			</a>
 		</div>
