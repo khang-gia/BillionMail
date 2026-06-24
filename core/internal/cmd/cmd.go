@@ -225,6 +225,12 @@ var (
 				"/subscribe_form_code.html":      {},
 			}
 
+			// excludedPrefixes lists path prefixes that always bypass the SafePath gate.
+			// /.well-known/ must be reachable by Let's Encrypt for ACME HTTP-01 challenges.
+			excludedPrefixes := []string{
+				"/.well-known/",
+			}
+
 			// Bind Server Hooks
 			s.BindHookHandlerByMap("/*", map[ghttp.HookName]ghttp.HandlerFunc{
 				ghttp.HookBeforeServe: func(r *ghttp.Request) {
@@ -246,6 +252,13 @@ var (
 						// check if the request is in the excluded URIs
 						if _, ok := excludesURIs[r.URL.Path]; ok {
 							return
+						}
+
+						// check if the request matches any excluded prefix (e.g. /.well-known/)
+						for _, prefix := range excludedPrefixes {
+							if strings.HasPrefix(r.URL.Path, prefix) {
+								return
+							}
 						}
 
 						if r.IsFileRequest() {
