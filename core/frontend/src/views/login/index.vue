@@ -3,7 +3,7 @@
 		<div class="login-card">
 			<div class="logo-container">
 				<div class="logo">
-					<img class="w-full" src="@/assets/images/logo.png" />
+					<img class="w-full" src="@/assets/images/mailix-logo.png" />
 				</div>
 			</div>
 
